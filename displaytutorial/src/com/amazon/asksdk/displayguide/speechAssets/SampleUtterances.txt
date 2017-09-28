@@ -1,0 +1,74 @@
+WelcomeIntent Welcome screen
+
+TopicListIntent show me topics I can learn about
+TopicListIntent topics
+
+TemplateOverviewIntent how do you render a template
+TemplateOverviewIntent how do I use a template
+TemplateOverviewIntent Rendering Templates
+TemplateOverviewIntent go back to the list of templates
+TemplateOverviewIntent list of templates
+TemplateOverviewIntent using the Render Template Directive
+TemplateOverviewIntent templates
+
+IndividualTemplateIntent {template_kind} template {number}
+IndividualTemplateIntent {template_kind} template {number} example
+
+
+SelectItemIntent select number {number}
+SelectItemIntent select {number}
+SelectItemIntent choose number {number}
+SelectItemIntent choose {number}
+SelectItemIntent number {number}
+
+VideoInstructionalIntent how do I play a video
+VideoInstructionalIntent show me how to play a video
+VideoInstructionalIntent showing videos
+VideoInstructionalIntent videos
+
+WatchVideoIntent watch video
+WatchVideoIntent watch sample video
+WatchVideoIntent watch the video
+WatchVideoIntent launch video
+WatchVideoIntent launch sample video
+WatchVideoIntent play the video
+
+InlineImageTagIntent image
+InlineImageTagIntent how do I show an image inline with text
+InlineImageTagIntent including images inline with text
+InlineImageTagIntent including images in rich text areas
+InlineImageTagIntent including images in rich text elements
+InlineImageTagIntent inline images
+InlineImageTagIntent include inline images
+
+ActionTagIntent actions
+ActionTagIntent action
+ActionTagIntent how do I include an action tag
+ActionTagIntent how do I use an action tag
+ActionTagIntent how do I use an action
+ActionTagIntent how do I use an action element
+ActionTagIntent how do I link between templates
+ActionTagIntent can you add a clickable link
+ActionTagIntent how do you include clickable actions
+ActionTagIntent how do you include an action
+ActionTagIntent how do you include and action tag
+ActionTagIntent text wrapped in an action tag is selectable on-screen
+ActionTagIntent clickable actions
+
+ItemSelectionIntent how do you handle selection of list items
+ItemSelectionIntent how do I handle selection of list items
+ItemSelectionIntent handling list item selection
+ItemSelectionIntent list item touch events
+ItemSelectionIntent select a list item by voice
+ItemSelectionIntent selecting list items
+ItemSelectionIntent list item selection
+
+HintsIntent hints
+HintsIntent what is a hint
+HintsIntent what is a hint text
+HintsIntent what is a hint phrase
+HintsIntent hint phrases
+HintsIntent hint texts
+HintsIntent how do I use a hint
+HintsIntent how do you include a hint text
+
