@@ -5,9 +5,6 @@ The documentation for the Alexa Skills Kit is available on the [Amazon Apps and 
 
 ## Contents
 The included samples represent how to use Java AWS Lambda functions as Alexa Skills.
-The following samples are included (ordered by complexity, see the Using Alexa Skills Kit Samples
-link below for more details):
-
 
 - DisplayTutorial: a tutorial-style Alexa Skill that showcases the features of the Amazon Echo Show.
 
