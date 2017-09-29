@@ -25,6 +25,7 @@ This skill shows how to create a Lambda function for handling Alexa Skill reques
 Setup
 -------------
 To run this example skill you need to do two things. The first is to deploy the example code in lambda, and the second is to configure the Alexa skill to use Lambda.
+
 AWS Lambda Setup
 ----------------------------
 1. Go to the [AWS Console](https://aws.amazon.com/) and click on the Lambda link. Note: ensure you are in us-east or you wont be able to use Alexa with Lambda.
