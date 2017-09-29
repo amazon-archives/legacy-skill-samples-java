@@ -60,12 +60,19 @@ Alexa Skill Setup
 Examples
 --------------
 User: "Alexa, ask display guide to show me topics I can learn about"
+
 User: "how do I use a template"
+
 User: "how do I play a video"
+
 User: "how do I show an image inline with text"
+
 User: "how do I include an action tag"
+
 User: "how do I handle selection of list items"
+
 User: "how do I use a hint"
+
 
 
 
