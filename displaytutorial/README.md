@@ -1,4 +1,4 @@
-Alexa Skill Kit - Display Interface Guide
+Alexa Skill Kit SDK Sample - Display Interface Guide
 ===================
 
 
@@ -35,7 +35,7 @@ AWS Lambda Setup
 5. Name the Lambda Function "Display-Interface-Guide-Skill".
 6. Select the runtime as Java 8.
 7. Build a jar file to upload it into the lambda function. There are two ways:
-- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "displayguide-1.0-jar-with-dependencies.jar" in the target directory. 
+- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "displaytutorial-1.0-jar-with-dependencies.jar" in the target directory. 
 - Using gradle: go to the directory containing build.gradle,  and run 'gradle fatJar'. This will generate a zip file named "displaytutorial-fat-1.0.jar" in the build/libs directory.
 8. Select Code entry type as "Upload a .ZIP file" and then upload the jar file created in step 7 from the build directory to Lambda.
 9. Set the Handler as com.amazon.asksdk.displayguide.DisplayGuideRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
@@ -59,19 +59,13 @@ Alexa Skill Setup
 
 Examples
 --------------
-User: "Alexa, ask display guide to show me topics I can learn about"
-
-User: "how do I use a template"
-
-User: "how do I play a video"
-
-User: "how do I show an image inline with text"
-
-User: "how do I include an action tag"
-
-User: "how do I handle selection of list items"
-
-User: "how do I use a hint"
+    User: "Alexa, ask display guide to show me topics I can learn about"
+    User: "how do I use a template"
+    User: "how do I play a video"
+    User: "how do I show an image inline with text"
+    User: "how do I include an action tag"
+    User: "how do I handle selection of list items"
+    User: "how do I use a hint"
 
 
 

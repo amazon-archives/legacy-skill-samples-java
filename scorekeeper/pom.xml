@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>alexa-skills-kit-samples</groupId>
-  <artifactId>displaytutorial</artifactId>
+  <groupId>alexa-skills-kit-Java-samples</groupId>
+  <artifactId>scorekeeper</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
-  <name>displaytutorial</name>
+  <name>scorekeeper</name>
   <url>http://developer.amazon.com/ask</url>
 
   <repositories>
@@ -91,9 +91,9 @@
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
-        <resource>
-            <directory>src/resources</directory>
-        </resource>
+      <resource>
+        <directory>src/resources</directory>
+      </resource>
     </resources>
     <pluginManagement>
       <plugins>

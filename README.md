@@ -4,9 +4,19 @@
 The documentation for the Alexa Skills Kit is available on the [Amazon Apps and Services Developer Portal](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/).
 
 ## Contents
-The included samples represent how to use Java AWS Lambda functions as Alexa Skills.
-
-- DisplayTutorial: a tutorial-style Alexa Skill that showcases the features of the Amazon Echo Show.
+The included samples represent how to use Java AWS Lambda functions as Alexa Skills.The following samples are included (ordered by complexity, see the Using Alexa Skills Kit Samples link below for more details):
+The following samples are included (ordered by complexity, see the Using Alexa Skills Kit Samples link below for more details):
+- HelloWorld: a simple skill that repeats Hello World! on user input
+- SpaceGeek : a simple skill that responds to the user with a space fact.
+- Session: a simple skill that asks for your favorite color, then repeats it back to you using session attributes.
+- MinecraftHelper : a simple skill that responds to the user's recipe queries with formulas.
+- WiseGuy : a skill that tells knock knock jokes.
+- HistoryBuff : a skill that gives historical information that happened on a user provided day.
+- Savvy Consumer : a skill that looks up a category on Amazon and returns the best selling products.
+- TidePooler : a skill that looks up tide information for various cities.
+- ScoreKeeper : a skill that can keep score of a game.
+- Device Address : a skill that demonstrates how to use the Device Address API.
+- DisplayTutorial: a skill that showcases the features of the Amazon Echo Show.
 
 ## Usage
 Navigate to the README.md in each sub directory in the samples folder and follow the instructions for getting the sample up and running.
