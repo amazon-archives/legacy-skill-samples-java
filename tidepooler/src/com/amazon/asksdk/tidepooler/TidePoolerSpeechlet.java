@@ -96,7 +96,7 @@ public class TidePoolerSpeechlet implements Speechlet {
     private static final String SESSION_DATE_REQUEST = "requestDateParam";
 
     private static final String DATUM = "MLLW";
-    private static final String ENDPOINT = "http://tidesandcurrents.noaa.gov/api/datagetter";
+    private static final String ENDPOINT = "https://tidesandcurrents.noaa.gov/api/datagetter";
 
     // NOAA station codes
     private static final int STATION_CODE_SEATTLE = 9447130;
