@@ -27,6 +27,7 @@ import com.amazon.speech.slu.Intent;
 import com.amazon.speech.speechlet.Context;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
+import com.amazon.speech.speechlet.Permissions;
 import com.amazon.speech.speechlet.Session;
 import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
@@ -126,12 +127,13 @@ public class DeviceAddressSpeechlet implements SpeechletV2 {
             // This is the custom intent that delivers the main functionality of the sample skill.
             // Refer to speechAssets/SampleUtterances for examples that would trigger this.
             case "GetAddress":
-                String consentToken = session.getUser().getPermissions().getConsentToken();
-
-                if (consentToken == null) {
+                Permissions permissions = session.getUser().getPermissions();
+                if (permissions == null) {
                     log.info("The user hasn't authorized the skill. Sending a permissions card.");
                     return getPermissionsResponse();
                 }
+
+                String consentToken = permissions.getConsentToken();
 
                 try {
                     SystemState systemState = getSystemState(speechletRequestEnvelope.getContext());
