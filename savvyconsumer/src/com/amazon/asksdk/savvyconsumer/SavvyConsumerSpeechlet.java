@@ -34,9 +34,10 @@ import com.amazon.speech.speechlet.LaunchRequest;
 import com.amazon.speech.speechlet.Session;
 import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
-import com.amazon.speech.speechlet.Speechlet;
+import com.amazon.speech.speechlet.SpeechletV2;
 import com.amazon.speech.speechlet.SpeechletException;
 import com.amazon.speech.speechlet.SpeechletResponse;
+import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.ui.OutputSpeech;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.SsmlOutputSpeech;
@@ -86,7 +87,7 @@ import com.amazon.speech.ui.SimpleCard;
  * <p>
  * User: "No"
  */
-public class SavvyConsumerSpeechlet implements Speechlet {
+public class SavvyConsumerSpeechlet implements SpeechletV2 {
     private static final Logger log = LoggerFactory.getLogger(SavvyConsumerSpeechlet.class);
 
     /**
@@ -197,19 +198,17 @@ public class SavvyConsumerSpeechlet implements Speechlet {
     }
 
     @Override
-    public void onSessionStarted(final SessionStartedRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onSessionStarted requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
+        log.info("onSessionStarted requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
         // any initialization logic goes here
     }
 
     @Override
-    public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
+        log.info("onLaunch requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
         String speechOutput =
                 "Welcome to the Savvy Consumer. For which category do you want to "
@@ -225,8 +224,9 @@ public class SavvyConsumerSpeechlet implements Speechlet {
     }
 
     @Override
-    public SpeechletResponse onIntent(final IntentRequest request, final Session session)
-            throws SpeechletException {
+    public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+        IntentRequest request = requestEnvelope.getRequest();
+        Session session = requestEnvelope.getSession();
         log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
                 session.getSessionId());
 
@@ -254,15 +254,15 @@ public class SavvyConsumerSpeechlet implements Speechlet {
 
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else {
-            throw new SpeechletException("Invalid Intent");
+            String errorSpeech = "This is unsupported.  Please try something else.";
+            return newAskResponse(errorSpeech, false, errorSpeech, false);
         }
     }
 
     @Override
-    public void onSessionEnded(final SessionEndedRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope) {
+        log.info("onSessionEnded requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
         // any cleanup logic goes here
     }
@@ -274,12 +274,10 @@ public class SavvyConsumerSpeechlet implements Speechlet {
      * @param intent
      *            intent for the request
      * @return SpeechletResponse spoken and visual response for the given intent
-     * @throws SpeechletException
      * @see <a href="https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html">
      *      Product Advertising API </a>
      */
-    private SpeechletResponse getTopSellers(final Intent intent, final Session session)
-            throws SpeechletException {
+    private SpeechletResponse getTopSellers(final Intent intent, final Session session) {
         String repromptText = "";
 
         // Check if we are in a session, and if so then reprompt for yes or no
@@ -298,7 +296,14 @@ public class SavvyConsumerSpeechlet implements Speechlet {
         String category = categorySlot.getValue().replaceAll("\\.\\s*", "");
 
         if (lookupCategory != null) {
-            List<String> items = fetchTitles(lookupCategory);
+            List<String> items;
+            try {
+                items = fetchTitles(lookupCategory);
+            } catch (SpeechletException e) {
+                PlainTextOutputSpeech outputSpeech = new PlainTextOutputSpeech();
+                outputSpeech.setText("There was an error looking up best sellers.  Please try again later.");
+                return SpeechletResponse.newTellResponse(outputSpeech);
+            }
 
             // Configure the card and speech output.
             String cardTitle = "Top Sellers for " + category;

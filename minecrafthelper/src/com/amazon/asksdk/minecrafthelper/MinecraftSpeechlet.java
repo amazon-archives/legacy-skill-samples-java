@@ -16,12 +16,11 @@ import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
-import com.amazon.speech.speechlet.Session;
+import com.amazon.speech.speechlet.SpeechletV2;
 import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
-import com.amazon.speech.speechlet.Speechlet;
-import com.amazon.speech.speechlet.SpeechletException;
 import com.amazon.speech.speechlet.SpeechletResponse;
+import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
@@ -41,7 +40,7 @@ import com.amazon.speech.ui.SimpleCard;
  * <p>
  * Alexa:"(reads back recipe for paper)."
  */
-public class MinecraftSpeechlet implements Speechlet {
+public class MinecraftSpeechlet implements SpeechletV2 {
     private static final Logger log = LoggerFactory.getLogger(MinecraftSpeechlet.class);
 
     /**
@@ -50,19 +49,17 @@ public class MinecraftSpeechlet implements Speechlet {
     private static final String ITEM_SLOT = "Item";
 
     @Override
-    public void onSessionStarted(final SessionStartedRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onSessionStarted requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
+        log.info("onSessionStarted requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
         // any initialization logic goes here
     }
 
     @Override
-    public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
+        log.info("onLaunch requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
         String speechOutput =
                 "Welcome to the Minecraft Helper. You can ask a question like, "
@@ -76,10 +73,10 @@ public class MinecraftSpeechlet implements Speechlet {
     }
 
     @Override
-    public SpeechletResponse onIntent(final IntentRequest request, final Session session)
-            throws SpeechletException {
+    public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+        IntentRequest request = requestEnvelope.getRequest();
         log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+                requestEnvelope.getSession().getSessionId());
 
         Intent intent = request.getIntent();
         String intentName = (intent != null) ? intent.getName() : null;
@@ -99,15 +96,15 @@ public class MinecraftSpeechlet implements Speechlet {
 
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else {
-            throw new SpeechletException("Invalid Intent");
+            String errorSpeech = "This is unsupported.  Please try something else.";
+            return newAskResponse(errorSpeech, errorSpeech);
         }
     }
 
     @Override
-    public void onSessionEnded(final SessionEndedRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope) {
+        log.info("onSessionEnded requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
         // any cleanup logic goes here
     }

@@ -22,9 +22,9 @@ import com.amazon.speech.speechlet.LaunchRequest;
 import com.amazon.speech.speechlet.Session;
 import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
-import com.amazon.speech.speechlet.Speechlet;
-import com.amazon.speech.speechlet.SpeechletException;
+import com.amazon.speech.speechlet.SpeechletV2;
 import com.amazon.speech.speechlet.SpeechletResponse;
+import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
@@ -33,33 +33,31 @@ import com.amazon.speech.ui.SimpleCard;
  * This sample shows how to create a simple speechlet for handling intent requests and managing
  * session interactions.
  */
-public class SessionSpeechlet implements Speechlet {
+public class SessionSpeechlet implements SpeechletV2 {
     private static final Logger log = LoggerFactory.getLogger(SessionSpeechlet.class);
 
     private static final String COLOR_KEY = "COLOR";
     private static final String COLOR_SLOT = "Color";
 
     @Override
-    public void onSessionStarted(final SessionStartedRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onSessionStarted requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
+        log.info("onSessionStarted requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
         // any initialization logic goes here
     }
 
     @Override
-    public SpeechletResponse onLaunch(final LaunchRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
+        log.info("onLaunch requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
         return getWelcomeResponse();
     }
 
     @Override
-    public SpeechletResponse onIntent(final IntentRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onIntent requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+        IntentRequest request = requestEnvelope.getRequest();
+        Session session = requestEnvelope.getSession();
+        log.info("onIntent requestId={}, sessionId={}", request.getRequestId(), session);
 
         // Get intent from the request object.
         Intent intent = request.getIntent();
@@ -72,15 +70,15 @@ public class SessionSpeechlet implements Speechlet {
         } else if ("WhatsMyColorIntent".equals(intentName)) {
             return getColorFromSession(intent, session);
         } else {
-            throw new SpeechletException("Invalid Intent");
+            String errorSpeech = "This is unsupported.  Please try something else.";
+            return getSpeechletResponse(errorSpeech, errorSpeech, true);
         }
     }
 
     @Override
-    public void onSessionEnded(final SessionEndedRequest request, final Session session)
-            throws SpeechletException {
-        log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(),
-                session.getSessionId());
+    public void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope) {
+        log.info("onSessionEnded requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
         // any cleanup logic goes here
     }
 
