@@ -38,7 +38,7 @@ public class AlexaDeviceAddressClient {
     private static final Logger log = LoggerFactory.getLogger(AlexaDeviceAddressClient.class);
 
     private String deviceId;
-    private String consentToken;
+    private String apiAccessToken;
     private String apiEndpoint;
 
     private static final String BASE_API_PATH = "/v1/devices/";
@@ -50,12 +50,12 @@ public class AlexaDeviceAddressClient {
      * Constructor for the AlexaDeviceAddressClient. It will take the device ID, consent token, and api endpoint.
      * Those values will be used when making requests to the Device Address API.
      * @param requestDeviceId the deviceId of the device being retrieved.
-     * @param requestConsentToken the consentToken used for authorization against the Device Address API.
+     * @param requestApiAccessToken the apiAccessToken used for authorization against the Device Address API.
      * @param requestApiEndpoint the endpoint of the Device Address API. This could be the address endpoint for NA, EU, etc.
      */
-    public AlexaDeviceAddressClient(String requestDeviceId, String requestConsentToken, String requestApiEndpoint) {
+    public AlexaDeviceAddressClient(String requestDeviceId, String requestApiAccessToken, String requestApiEndpoint) {
         deviceId = requestDeviceId;
-        consentToken = requestConsentToken;
+        apiAccessToken = requestApiAccessToken;
         apiEndpoint = requestApiEndpoint;
     }
 
@@ -72,7 +72,7 @@ public class AlexaDeviceAddressClient {
 
         HttpGet httpGet = new HttpGet(requestUrl);
 
-        httpGet.addHeader("Authorization", "Bearer " + consentToken);
+        httpGet.addHeader("Authorization", "Bearer " + apiAccessToken);
 
         log.info("Sending request to Device Address API");
         Address address;

@@ -133,16 +133,14 @@ public class DeviceAddressSpeechlet implements SpeechletV2 {
                     return getPermissionsResponse();
                 }
 
-                String consentToken = permissions.getConsentToken();
-
                 try {
                     SystemState systemState = getSystemState(speechletRequestEnvelope.getContext());
-
+                    String apiAccessToken = systemState.getApiAccessToken();
                     String deviceId = systemState.getDevice().getDeviceId();
                     String apiEndpoint = systemState.getApiEndpoint();
 
                     AlexaDeviceAddressClient alexaDeviceAddressClient = new AlexaDeviceAddressClient(
-                        deviceId, consentToken, apiEndpoint);
+                        deviceId, apiAccessToken, apiEndpoint);
 
                     Address addressObject = alexaDeviceAddressClient.getFullAddress();
 

@@ -24,6 +24,10 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.amazon.speech.json.SpeechletRequestEnvelope;
+import com.amazon.speech.speechlet.Context;
+import com.amazon.speech.speechlet.interfaces.system.SystemInterface;
+import com.amazon.speech.speechlet.interfaces.system.SystemState;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +36,15 @@ import com.amazon.speech.slu.Intent;
 import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.LaunchRequest;
+import com.amazon.speech.speechlet.services.DirectiveEnvelope;
+import com.amazon.speech.speechlet.services.DirectiveEnvelopeHeader;
+import com.amazon.speech.speechlet.services.DirectiveService;
+import com.amazon.speech.speechlet.services.SpeakDirective;
 import com.amazon.speech.speechlet.Session;
 import com.amazon.speech.speechlet.SessionEndedRequest;
 import com.amazon.speech.speechlet.SessionStartedRequest;
 import com.amazon.speech.speechlet.SpeechletV2;
-import com.amazon.speech.speechlet.SpeechletException;
 import com.amazon.speech.speechlet.SpeechletResponse;
-import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.ui.OutputSpeech;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.SsmlOutputSpeech;
@@ -47,7 +53,7 @@ import com.amazon.speech.ui.SimpleCard;
 
 /**
  * This sample shows how to create a Lambda function for handling Alexa Skill requests that:
- * 
+ *
  * <ul>
  * <li><b>Web service</b>: communicate with an external web service to get events for specified days
  * in history (Wikipedia API)</li>
@@ -71,7 +77,7 @@ import com.amazon.speech.ui.SimpleCard;
  * <p>
  * Alexa: "Good bye!"
  * <p>
- * 
+ *
  * <b>Dialog model</b>
  * <p>
  * User: "Alexa, open History Buff"
@@ -149,35 +155,53 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
             "December"
     };
 
+    /**
+     * Service to send progressive response directives.
+     */
+    private DirectiveService directiveService;
+
+    /**
+     * Constructs an instance of {@link HistoryBuffSpeechlet}.
+     *
+     * @param directiveService implementation of directive service
+     */
+    public HistoryBuffSpeechlet(DirectiveService directiveService) {
+        this.directiveService = directiveService;
+    }
+
     @Override
     public void onSessionStarted(SpeechletRequestEnvelope<SessionStartedRequest> requestEnvelope) {
-        log.info("onSessionStarted requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
-                requestEnvelope.getSession().getSessionId());
+        SessionStartedRequest request = requestEnvelope.getRequest();
+        Session session = requestEnvelope.getSession();
+
+        log.info("onSessionStarted requestId={}, sessionId={}", request.getRequestId(),
+                session.getSessionId());
 
         // any initialization logic goes here
     }
 
     @Override
     public SpeechletResponse onLaunch(SpeechletRequestEnvelope<LaunchRequest> requestEnvelope) {
-        log.info("onLaunch requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
-                requestEnvelope.getSession().getSessionId());
+        LaunchRequest request = requestEnvelope.getRequest();
+        Session session = requestEnvelope.getSession();
+
+        log.info("onLaunch requestId={}, sessionId={}", request.getRequestId(),
+                session.getSessionId());
 
         return getWelcomeResponse();
     }
 
     @Override
     public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
-        IntentRequest request = requestEnvelope.getRequest();
-        Session session = requestEnvelope.getSession();
-        log.info("onIntent requestId={}, sessionId={}", request.getRequestId(), session.getSessionId());
+        log.info("onIntent requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
+                requestEnvelope.getSession().getSessionId());
 
-        Intent intent = request.getIntent();
-        String intentName = intent.getName();
+        String intentName = requestEnvelope.getRequest().getIntent().getName();
 
         if ("GetFirstEventIntent".equals(intentName)) {
-            return handleFirstEventRequest(intent, session);
+            return handleFirstEventRequest(requestEnvelope);
         } else if ("GetNextEventIntent".equals(intentName)) {
-            return handleNextEventRequest(session);
+            return handleNextEventRequest(requestEnvelope.getSession());
         } else if ("AMAZON.HelpIntent".equals(intentName)) {
             // Create the plain text output.
             String speechOutput =
@@ -200,22 +224,27 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
 
             return SpeechletResponse.newTellResponse(outputSpeech);
         } else {
-            String errorSpeech = "This is unsupported.  Please try something else.";
-            return newAskResponse(errorSpeech, false, errorSpeech, false);
+            String outputSpeech = "Sorry, I didn't get that.";
+            String repromptText = "What day do you want events for?";
+
+            return newAskResponse(outputSpeech, true, repromptText, true);
         }
     }
 
     @Override
     public void onSessionEnded(SpeechletRequestEnvelope<SessionEndedRequest> requestEnvelope) {
-        log.info("onSessionEnded requestId={}, sessionId={}", requestEnvelope.getRequest().getRequestId(),
-                requestEnvelope.getSession().getSessionId());
+        SessionEndedRequest request = requestEnvelope.getRequest();
+        Session session = requestEnvelope.getSession();
+
+        log.info("onSessionEnded requestId={}, sessionId={}", request.getRequestId(),
+                session.getSessionId());
 
         // any session cleanup logic would go here
     }
 
     /**
      * Function to handle the onLaunch skill behavior.
-     * 
+     *
      * @return SpeechletResponse object with voice/card response to return to the user
      */
     private SpeechletResponse getWelcomeResponse() {
@@ -235,7 +264,7 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
      * representation of that slot value. If the user provides a date, then use that, otherwise use
      * today. The date is in server time, not in the user's time zone. So "today" for the user may
      * actually be tomorrow.
-     * 
+     *
      * @param intent
      *            the intent object containing the day slot
      * @return the Calendar representation of that date
@@ -262,21 +291,27 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
      * Prepares the speech to reply to the user. Obtain events from Wikipedia for the date specified
      * by the user (or for today's date, if no date is specified), and return those events in both
      * speech and SimpleCard format.
-     * 
-     * @param intent
-     *            the intent object which contains the date slot
-     * @param session
-     *            the session object
+     *
+     * @param requestEnvelope
+     *            the intent request envelope to handle
      * @return SpeechletResponse object with voice/card response to return to the user
      */
-    private SpeechletResponse handleFirstEventRequest(Intent intent, Session session) {
-        Calendar calendar = getCalendar(intent);
+    private SpeechletResponse handleFirstEventRequest(SpeechletRequestEnvelope<IntentRequest> requestEnvelope) {
+        IntentRequest request = requestEnvelope.getRequest();
+        Session session = requestEnvelope.getSession();
+        SystemState systemState = getSystemState(requestEnvelope.getContext());
+        String apiEndpoint = systemState.getApiEndpoint();
+
+        Calendar calendar = getCalendar(request.getIntent());
         String month = MONTH_NAMES[calendar.get(Calendar.MONTH)];
         String date = Integer.toString(calendar.get(Calendar.DATE));
 
         String speechPrefixContent = "<p>For " + month + " " + date + "</p> ";
         String cardPrefixContent = "For " + month + " " + date + ", ";
         String cardTitle = "Events on " + month + " " + date;
+
+        // Dispatch a progressive response to engage the user while fetching events
+        dispatchProgressiveResponse(request.getRequestId(), "Searching", systemState, apiEndpoint);
 
         ArrayList<String> events = getJsonEventsFromWikipedia(month, date);
         String speechOutput = "";
@@ -333,7 +368,7 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
      * and store it back in session attributes. This allows us to obtain new events without making
      * repeated network calls, by storing values (events, index) during the interaction with the
      * user.
-     * 
+     *
      * @param session
      *            object containing session attributes with events list and index
      * @return SpeechletResponse object with voice/card response to return to the user
@@ -387,7 +422,7 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
     /**
      * Download JSON-formatted list of events from Wikipedia, for a defined day/date, and return a
      * String array of the events, with each event representing an element in the array.
-     * 
+     *
      * @param month
      *            the month to get events for, example: April
      * @param date
@@ -422,7 +457,7 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
      * Parse JSON-formatted list of events/births/deaths from Wikipedia, extract list of events and
      * split the events into a String array of individual events. Run Regex matchers to make the
      * list pretty by adding a comma after the year to add a pause, and by removing a unicode char.
-     * 
+     *
      * @param text
      *            the JSON formatted list of events/births/deaths for a certain date
      * @return String array of events for that date, 1 event per element of the array
@@ -462,7 +497,7 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
 
     /**
      * Wrapper for creating the Ask response from the input strings.
-     * 
+     *
      * @param stringOutput
      *            the output to be spoken
      * @param isOutputSsml
@@ -496,4 +531,40 @@ public class HistoryBuffSpeechlet implements SpeechletV2 {
         return SpeechletResponse.newAskResponse(outputSpeech, reprompt);
     }
 
+    /**
+     * Dispatches a progressive response.
+     *
+     * @param requestId
+     *            the unique request identifier
+     * @param text
+     *            the text of the progressive response to send
+     * @param systemState
+     *            the SystemState object
+     * @param apiEndpoint
+     *            the Alexa API endpoint
+     */
+    private void dispatchProgressiveResponse(String requestId, String text, SystemState systemState, String apiEndpoint) {
+        DirectiveEnvelopeHeader header = DirectiveEnvelopeHeader.builder().withRequestId(requestId).build();
+        SpeakDirective directive = SpeakDirective.builder().withSpeech(text).build();
+        DirectiveEnvelope directiveEnvelope = DirectiveEnvelope.builder()
+                .withHeader(header).withDirective(directive).build();
+
+        if(systemState.getApiAccessToken() != null && !systemState.getApiAccessToken().isEmpty()) {
+            String token = systemState.getApiAccessToken();
+            try {
+                directiveService.enqueue(directiveEnvelope, apiEndpoint, token);
+            } catch (Exception e) {
+                log.error("Failed to dispatch a progressive response", e);
+            }
+        }
+    }
+
+    /**
+     * Helper method that retrieves the system state from the request context.
+     * @param context request context.
+     * @return SystemState the systemState
+     */
+    private SystemState getSystemState(Context context) {
+        return context.getState(SystemInterface.class, SystemState.class);
+    }
 }

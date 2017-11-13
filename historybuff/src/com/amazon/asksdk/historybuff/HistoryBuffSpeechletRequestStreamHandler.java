@@ -14,11 +14,12 @@ import java.util.Set;
 
 import com.amazon.speech.speechlet.Speechlet;
 import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
+import com.amazon.speech.speechlet.services.DirectiveServiceClient;
 
 /**
  * This class could be the handler for an AWS Lambda function powering an Alexa Skills Kit
  * experience. To do this, simply set the handler field in the AWS Lambda console to
- * "com.amazon.asksdk.historybuff.HistoryBuffSpeechletRequestStreamHandler" For this to work, you'll also need to
+ * "historybuff.HistoryBuffSpeechletRequestStreamHandler" For this to work, you'll also need to
  * build this project using the {@code lambda-compile} Ant task and upload the resulting zip file to
  * power your function.
  */
@@ -36,7 +37,7 @@ public class HistoryBuffSpeechletRequestStreamHandler extends SpeechletRequestSt
     }
 
     public HistoryBuffSpeechletRequestStreamHandler() {
-        super(new HistoryBuffSpeechlet(), supportedApplicationIds);
+        super(new HistoryBuffSpeechlet(new DirectiveServiceClient()), supportedApplicationIds);
     }
 
     public HistoryBuffSpeechletRequestStreamHandler(Speechlet speechlet,

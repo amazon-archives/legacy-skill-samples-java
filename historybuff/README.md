@@ -20,7 +20,7 @@ To run this example skill you need to do two things. The first is to deploy the 
 5. Name the Lambda Function "History-Buff-Example-Skill".
 6. Select the runtime as Java 8.
 7. Build a jar file to upload it into the lambda function. There are two ways:
-- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "historybuff-1.0-jar-with-dependencies.jar" in the target directory. 
+- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "historybuff-1.0-jar-with-dependencies.jar" in the target directory.
 - Using gradle: go to the directory containing build.gradle,  and run 'gradle fatJar'. This will generate a zip file named "historybuff-fat-1.0.jar" in the build/libs directory.
 8. Select Code entry type as "Upload a .ZIP file" and then upload the jar file created in step 7 from the build directory to Lambda.
 9. Set the Handler as com.amazon.asksdk.historybuff.HistoryBuffSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
@@ -48,7 +48,7 @@ To run this example skill you need to do two things. The first is to deploy the 
     User: "No."
     Alexa: "Good bye!"
 ### Dialog model:
-    User: "Alexa, open History Buff" 
+    User: "Alexa, open History Buff"
     Alexa: "History Buff. What day do you want events for?"
     User: "August thirtieth."
     Alexa: "For August thirtieth, in 2003, [...] . Wanna go deeper in history?"
