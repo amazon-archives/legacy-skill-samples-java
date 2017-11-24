@@ -20,9 +20,10 @@ To run this example skill you need to do two things. The first is to deploy the 
 8. Select Code entry type as "Upload a .ZIP file" and then upload the jar file created in step 7 from the build directory to Lambda.
 9. Set the Handler as com.amazon.asksdk.helloworld.HelloWorldSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
 10. Choose an existing role - lambda_basic_execution.
-11. Leave the Advanced settings as the defaults.
-12. Click "Next" and review the settings then click "Create Function".
-13. Copy the ARN from the top right to be used later in the Alexa Skill Setup.
+11. Increase the Timeout to 30 seconds under Basic Settings.
+12. Leave the Advanced settings as the defaults.
+13. Click "Next" and review the settings then click "Create Function".
+14. Copy the ARN from the top right to be used later in the Alexa Skill Setup.
 
 ### Alexa Skill Setup
 1. Go to the [Alexa Console](https://developer.amazon.com/edw/home.html) and click Add a New Skill.
