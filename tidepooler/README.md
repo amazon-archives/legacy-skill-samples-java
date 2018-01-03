@@ -1,4 +1,4 @@
-#Alexa Skills Kit SDK Sample - Tide pooler
+# Alexa Skills Kit SDK Sample - Tide pooler
 A simple [AWS Lambda](http://aws.amazon.com/lambda) function that demonstrates how to write a skill for the Amazon Echo using the Alexa SDK.
 
 ## Concepts
@@ -25,7 +25,7 @@ To run this example skill you need to do two things. The first is to deploy the 
 5. Name the Lambda Function "Tide-Pooler-Example-Skill".
 6. Select the runtime as Java 8.
 7. Build a jar file to upload it into the lambda function. There are two ways:
-- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "tidepooler-1.0-jar-with-dependencies.jar" in the target directory. 
+- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "tidepooler-1.0-jar-with-dependencies.jar" in the target directory.
 - Using gradle: go to the directory containing build.gradle,  and run 'gradle fatJar'. This will generate a zip file named "tidepooler-fat-1.0.jar" in the build/libs directory.
 8. Select Code entry type as "Upload a .ZIP file" and then upload the jar file created in step 7 from the build directory to Lambda.
 9. Set the Handler as com.amazon.asksdk.tidepooler.TidePoolerSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
@@ -51,7 +51,7 @@ To run this example skill you need to do two things. The first is to deploy the 
 ### One-shot model:
     User:  "Alexa, ask Tide Pooler when is the high tide in Seattle on Saturday"
     Alexa: "Saturday June 20th in Seattle the first high tide will be around 7:18 am, and will peak at ..."
-    
+
 ### Dialog model:
     User:  "Alexa, open Tide Pooler"
     Alexa: "Welcome to Tide Pooler. Which city would you like tide information for?"

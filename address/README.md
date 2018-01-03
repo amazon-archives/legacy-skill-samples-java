@@ -1,4 +1,4 @@
-#Alexa Skill Kit SDK Sample - Address
+# Alexa Skill Kit SDK Sample - Address
 A simple [AWS Lambda](http://aws.amazon.com/lambda) function that demonstrates how to write a skill for the Amazon Echo using the Alexa SDK.
 
 ## Concepts

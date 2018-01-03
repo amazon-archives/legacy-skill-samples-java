@@ -1,4 +1,4 @@
-#Alexa Skills Kit SDK Sample - History Buff
+# Alexa Skills Kit SDK Sample - History Buff
 A simple [AWS Lambda](http://aws.amazon.com/lambda) function that demonstrates how to write a skill for the Amazon Echo using the Alexa SDK.
 
 ## Concepts

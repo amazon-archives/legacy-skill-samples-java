@@ -1,4 +1,4 @@
-#Alexa Skills Kit SDK Sample - Savvy Consumer
+# Alexa Skills Kit SDK Sample - Savvy Consumer
 A simple [AWS Lambda](http://aws.amazon.com/lambda) function that demonstrates how to write a skill for the Amazon Echo using the Alexa SDK.
 
 ## Concepts
@@ -21,7 +21,7 @@ To run this example skill you need to do two things. The first is to deploy the 
 5. Name the Lambda Function "Savvy-Consumer-Example-Skill".
 6. Select the runtime as Java 8.
 7. Build a jar file to upload it into the lambda function. There are two ways:
-- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "savvyconsumer-1.0-jar-with-dependencies.jar" in the target directory. 
+- Using maven: go to the directory containing pom.xml, and run 'mvn assembly:assembly -DdescriptorId=jar-with-dependencies package'. This will generate a zip file named "savvyconsumer-1.0-jar-with-dependencies.jar" in the target directory.
 - Using gradle: go to the directory containing build.gradle,  and run 'gradle fatJar'. This will generate a zip file named "savvyconsumer-fat-1.0.jar" in the build/libs directory.
 9. Set the Handler as com.amazon.asksdk.savvyconsumer.SavvyConsumerSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
 10. Choose an existing role - lambda_basic_execution.
