@@ -1,0 +1,158 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "LIST_OF_SETUP_NAMES",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "to",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "beets",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "little Old Lady",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "a broken pencil",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "snow",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "boo",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "woo",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "spell",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "atch",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "owls",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "berry",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "SetupNameWhoIntent",
+        "samples": [
+          "{SetupName} who"
+        ],
+        "slots": [
+          {
+            "name": "SetupName",
+            "type": "LIST_OF_SETUP_NAMES"
+          }
+        ]
+      },
+      {
+        "name": "TellMeAJokeIntent",
+        "samples": [
+          "tell me a joke",
+          "tell a joke",
+          "say a joke",
+          "make a joke",
+          "give me a joke",
+          "tell me a knock knock joke",
+          "tell a knock knock joke",
+          "say a knock knock joke",
+          "make a knock knock joke",
+          "give me a knock knock joke",
+          "a joke",
+          "a knock knock joke",
+          "the joke",
+          "the knock knock joke",
+          "what's a joke",
+          "what is a joke",
+          "if it can tell me a joke",
+          "will it tell me a joke",
+          "can it tell me a joke",
+          "to tell me a joke",
+          "what's a knock knock joke",
+          "what is a knock knock joke",
+          "if it can tell me a knock knock joke",
+          "will it tell me a knock knock joke",
+          "can it tell me a knock knock joke",
+          "to tell me a knock knock joke"
+        ],
+        "slots": []
+      },
+      {
+        "name": "WhosThereIntent",
+        "samples": [
+          "who is there",
+          "who's there",
+          "who there",
+          "who is this",
+          "who's this"
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "wise guy"
+  }
+}

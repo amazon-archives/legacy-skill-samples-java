@@ -1,0 +1,50 @@
+{
+  "languageModel": {
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": [
+          "no",
+          "nope",
+          "no thanks",
+          "no thank you"
+        ]
+      },
+      {
+        "name": "GetFirstEventIntent",
+        "samples": [
+          "get events for {day}",
+          "give me events for {day}",
+          "what happened on {day}",
+          "what happened",
+          "{day}"
+        ],
+        "slots": [
+          {
+            "name": "day",
+            "type": "AMAZON.DATE"
+          }
+        ]
+      },
+      {
+        "name": "GetNextEventIntent",
+        "samples": [
+          "yes",
+          "yup",
+          "sure",
+          "yes please"
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "history buff"
+  }
+}

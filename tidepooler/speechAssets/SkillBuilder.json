@@ -1,0 +1,331 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "LIST_OF_CITIES",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "seattle",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "los angeles",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "monterey",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "san diego",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "san francisco",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "boston",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "new york",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "miami",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "wilmington",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "tampa",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "galveston",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "morehead",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "new orleans",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "beaufort",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "myrtle beach",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "virginia beach",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "charleston",
+              "synonyms": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "LIST_OF_STATES",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "california",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "florida",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "louisiana",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "massachusetts",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "new york",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "north carolina",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "south carolina",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "texas",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "virginia",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "washington",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "DialogTideIntent",
+        "samples": [
+          "{City}",
+          "{City} {State}",
+          "{Date}"
+        ],
+        "slots": [
+          {
+            "name": "City",
+            "type": "LIST_OF_CITIES"
+          },
+          {
+            "name": "State",
+            "type": "LIST_OF_STATES"
+          },
+          {
+            "name": "Date",
+            "type": "AMAZON.DATE"
+          }
+        ]
+      },
+      {
+        "name": "OneshotTideIntent",
+        "samples": [
+          "get high tide",
+          "get high tide for {City} {State}",
+          "get high tide for {City} {State} {Date}",
+          "get high tide for {City} {Date}",
+          "get high tide for {Date}",
+          "get high tide {Date}",
+          "get the high tide for {City} {Date}",
+          "get the next tide for {City} for {Date}",
+          "get the tides for {Date}",
+          "get tide information for {City}",
+          "get tide information for {City} {State}",
+          "get tide information for {City} {State} on {Date}",
+          "get tide information for {City} city",
+          "get tide information for {City} for {Date}",
+          "get tide information for {City} on {Date}",
+          "get tide information for {City} {Date}",
+          "get tides for {City}",
+          "get tides for {City} {State}",
+          "get tides for {City} {State} {Date}",
+          "get tides for {City} {Date}",
+          "tide information",
+          "tide information for {City}",
+          "tide information for {City} {State}",
+          "tide information for {City} on {Date}",
+          "tide information for {Date}",
+          "when high tide is",
+          "when is high tide",
+          "when is high tide for {City} {Date}",
+          "when is high tide in {City}",
+          "when is high tide in {City} {State}",
+          "when is high tide in {City} city",
+          "when is high tide in {City} on {Date}",
+          "when is high tide on {Date}",
+          "when is high tide {Date}",
+          "when is next tide",
+          "when is next tide in {City} {State}",
+          "when is next tide in {City} {State} on {Date}",
+          "when is next tide on {Date}",
+          "when is the highest tide in {City}",
+          "when is the highest tide in {City} {Date}",
+          "when is the highest tide {Date}",
+          "when is the next high tide {Date}",
+          "when is the next highest water",
+          "when is the next highest water for {City}",
+          "when is the next highest water for {City} {State} for {Date}",
+          "when is the next highest water for {City} {State}",
+          "when is the next highest water for {Date}",
+          "when is the next tide for {City}",
+          "when is the next tide for {City} {State}",
+          "when is the next tide for {City} city",
+          "when is the next tide for {City} for {Date}",
+          "when is the next tide for {Date}",
+          "when is today's high tide",
+          "when is today's highest tide {Date}",
+          "when will the water be highest for {City}",
+          "when will the water be highest for {City} for {Date}",
+          "when will the water be highest for {Date}",
+          "when will the water be highest {Date}",
+          "get high tide for {City} California {Date}"
+        ],
+        "slots": [
+          {
+            "name": "City",
+            "type": "LIST_OF_CITIES"
+          },
+          {
+            "name": "State",
+            "type": "LIST_OF_STATES"
+          },
+          {
+            "name": "Date",
+            "type": "AMAZON.DATE"
+          }
+        ]
+      },
+      {
+        "name": "SupportedCitiesIntent",
+        "samples": [
+          "what cities",
+          "what cities are supported",
+          "which cities are supported",
+          "which cities",
+          "which cities do you know"
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "tide pooler"
+  }
+}

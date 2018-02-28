@@ -1,0 +1,234 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "TEMPLATE_KIND_SLOT",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "body",
+              "synonyms": []
+            }
+          },
+          {
+            "id": null,
+            "name": {
+              "value": "list",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "ActionTagIntent",
+        "samples": [
+          "actions",
+          "action",
+          "how do I include an action tag",
+          "how do I use an action tag",
+          "how do I use an action",
+          "how do I use an action element",
+          "how do I link between templates",
+          "can you add a clickable link",
+          "how do you include clickable actions",
+          "how do you include an action",
+          "how do you include and action tag",
+          "text wrapped in an action tag is selectable on-screen",
+          "clickable actions"
+        ],
+        "slots": []
+      },
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.MoreIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.NavigateHomeIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.NavigateSettingsIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.NextIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.NoIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.PageDownIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.PageUpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.PreviousIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.ScrollDownIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.ScrollLeftIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.ScrollRightIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.ScrollUpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.YesIntent",
+        "samples": []
+      },
+      {
+        "name": "HintsIntent",
+        "samples": [
+          "hints",
+          "what is a hint",
+          "what is a hint text",
+          "what is a hint phrase",
+          "hint phrases",
+          "hint texts",
+          "how do I use a hint",
+          "how do you include a hint text"
+        ],
+        "slots": []
+      },
+      {
+        "name": "IndividualTemplateIntent",
+        "samples": [
+          "{template_kind} template {number}",
+          "{template_kind} template {number} example"
+        ],
+        "slots": [
+          {
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          },
+          {
+            "name": "template_kind",
+            "type": "TEMPLATE_KIND_SLOT"
+          }
+        ]
+      },
+      {
+        "name": "InlineImageTagIntent",
+        "samples": [
+          "image",
+          "how do I show an image inline with text",
+          "including images inline with text",
+          "including images in rich text areas",
+          "including images in rich text elements",
+          "inline images",
+          "include inline images"
+        ],
+        "slots": []
+      },
+      {
+        "name": "ItemSelectionIntent",
+        "samples": [
+          "how do you handle selection of list items",
+          "how do I handle selection of list items",
+          "handling list item selection",
+          "list item touch events",
+          "select a list item by voice",
+          "selecting list items",
+          "list item selection"
+        ],
+        "slots": []
+      },
+      {
+        "name": "SelectItemIntent",
+        "samples": [
+          "select number {number}",
+          "select {number}",
+          "choose number {number}",
+          "choose {number}",
+          "number {number}"
+        ],
+        "slots": [
+          {
+            "name": "number",
+            "type": "AMAZON.NUMBER"
+          }
+        ]
+      },
+      {
+        "name": "TemplateOverviewIntent",
+        "samples": [
+          "how do you render a template",
+          "how do I use a template",
+          "Rendering Templates",
+          "go back to the list of templates",
+          "list of templates",
+          "using the Render Template Directive",
+          "templates"
+        ],
+        "slots": []
+      },
+      {
+        "name": "TopicListIntent",
+        "samples": [
+          "show me topics I can learn about",
+          "topics"
+        ],
+        "slots": []
+      },
+      {
+        "name": "VideoInstructionalIntent",
+        "samples": [
+          "how do I play a video",
+          "show me how to play a video",
+          "showing videos",
+          "videos"
+        ],
+        "slots": []
+      },
+      {
+        "name": "WatchVideoIntent",
+        "samples": [
+          "watch video",
+          "watch sample video",
+          "watch the video",
+          "launch video",
+          "launch sample video",
+          "play the video"
+        ],
+        "slots": []
+      },
+      {
+        "name": "WelcomeIntent",
+        "samples": [
+          "Welcome screen"
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "display guide"
+  }
+}

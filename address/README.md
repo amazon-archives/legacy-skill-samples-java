@@ -1,4 +1,4 @@
-#Alexa Skill Kit SDK Sample - Address
+# Alexa Skill Kit SDK Sample - Address
 A simple [AWS Lambda](http://aws.amazon.com/lambda) function that demonstrates how to write a skill for the Amazon Echo using the Alexa SDK.
 
 ## Concepts
@@ -23,21 +23,23 @@ To run this example skill you need to do two things. The first is to deploy the 
 8. Select Code entry type as "Upload a .ZIP file" and then upload the jar file created in step 7 from the build directory to Lambda.
 9. Set the Handler as com.amazon.asksdk.address.DeviceAddressSpeechletRequestStreamHandler (this refers to the Lambda RequestStreamHandler file in the zip).
 10. Choose an existing role - lambda_basic_execution.
-11. Leave the Advanced settings as the defaults.
-12. Click "Next" and review the settings then click "Create Function".
-13. Copy the ARN from the top right to be used later in the Alexa Skill Setup.
+11. Increase the Timeout to 30 seconds under Basic Settings.
+12. Leave the Advanced settings as the defaults.
+13. Click "Next" and review the settings then click "Create Function".
+14. Copy the ARN from the top right to be used later in the Alexa Skill Setup.
 
 ### Alexa Skill Setup
 1. Go to the [Alexa Console](https://developer.amazon.com/edw/home.html) and click Add a New Skill.
 2. Set "AddressSkill" as the skill name and "address skill" as the invocation name, this is what is used to activate your skill. For example you would say: "Alexa, Ask address Skill what's my address."
 3. Select the Lambda ARN for the skill Endpoint and paste the ARN copied from above. Click Next.
-4. Copy the Intent Schema from the included IntentSchema.json.
-5. Copy the Sample Utterances from the included SampleUtterances.txt. Click Next.
-6. Go back to the skill Information tab and copy the appId. Paste the appId into the DeviceAddressSpeechletRequestStreamHandler.java file for the variable supportedApplicationIds,
+4. Copy the contents of SpeechAssets.
+    - If you are using the new Skill Builder, copy the Skill Builder from included SkillBuilder.json.
+    - Otherwise, copy the Intent Schema from the included IntentSchema.json. Copy the Sample Utterances from the included SampleUtterances.txt. Click Next.
+5. Go back to the skill Information tab and copy the appId. Paste the appId into the DeviceAddressSpeechletRequestStreamHandler.java file for the variable supportedApplicationIds,
    then update the lambda source zip file with this change and upload to lambda again, this step makes sure the lambda function only serves request from authorized source.
-7. You are now able to start testing your sample skill! You should be able to go to the [Echo webpage](http://echo.amazon.com/#skills) and see your skill enabled.
-8. In order to test it, try to say some of the Sample Utterances from the Examples section below.
-9. Your skill is now saved and once you are finished testing you can continue to publish your skill.
+6. You are now able to start testing your sample skill! You should be able to go to the [Echo webpage](http://echo.amazon.com/#skills) and see your skill enabled.
+7. In order to test it, try to say some of the Sample Utterances from the Examples section below.
+8. Your skill is now saved and once you are finished testing you can continue to publish your skill.
 
 ## Examples
 ### One-shot model:
