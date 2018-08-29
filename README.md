@@ -1,6 +1,8 @@
+# **These samples utilize a version of the Alexa Skills Kit SDK that is no longer supported. Please visit the project repository [here](https://github.com/alexa/alexa-skills-kit-sdk-for-java) to find resources for using the latest SDK**
+
 # Alexa Skills Kit SDK Java Samples
 
-##Alexa Skills Kit Documentation
+## Alexa Skills Kit Documentation
 The documentation for the Alexa Skills Kit is available on the [Amazon Apps and Services Developer Portal](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit/).
 
 ## Contents
